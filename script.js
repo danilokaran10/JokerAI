@@ -3,21 +3,18 @@ let send = document.getElementById("send");
 let aiText = document.getElementById("ai-text");
 
 send.addEventListener("click", () => {
-  if (!input.value.trim()) return;
+  let message = input.value.trim();
+  if (!message) return;
 
   aiText.innerText = "AI is thinking...";
   input.value = "";
 
-  fetch("https://v2.jokeapi.dev/joke/Any")
+  fetch(`https://aimlapi.com/api/talk?uid=danilo123&msg=${encodeURIComponent(message)}`)
     .then(res => res.json())
     .then(data => {
-      if (data.type === "single") {
-        aiText.innerText = data.joke;
-      } else if (data.type === "twopart") {
-        aiText.innerText = data.setup + "\n\n" + data.delivery;
-      } else {
-        aiText.innerText = "Hmm, no joke found!";
-      }
+      aiText.innerText = data.response || "No reply from AI.";
     })
-    .catch(() => aiText.innerText = "AI error. Try again.");
+    .catch(() => {
+      aiText.innerText = "AI error. Try again.";
+    });
 });
