@@ -9,14 +9,15 @@ send.addEventListener("click", () => {
   aiText.innerText = "AI is thinking...";
   input.value = "";
 
-  const apiUrl = `https://aimlapi.com/api/talk?key=${085142b2f4da489a9289c93b696949d2}&msg=${encodeURIComponent(message)}`;
-
-  fetch(apiUrl)
-    .then(res => res.json())
-    .then(data => {
-      aiText.innerText = data.response || "No reply from AI.";
-    })
-    .catch(() => {
-      aiText.innerText = "AI error. Try again.";
-    });
+  fetch('https://v2.jokeapi.dev/joke/Any')
+  .then(res => res.json())
+  .then(data => {
+    let joke = "";
+    if (data.type === "single") {
+      joke = data.joke;
+    } else {
+      joke = `${data.setup} ... ${data.delivery}`;
+    }
+    console.log(joke);
+  });
 });
