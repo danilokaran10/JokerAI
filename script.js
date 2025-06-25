@@ -9,7 +9,8 @@ send.addEventListener("click", () => {
   aiText.innerText = "AI is thinking...";
   input.value = "";
 
-  const apiUrl = `https://aimlapi.com/api/talk?uid=danilo123&msg=${encodeURIComponent(message)}`;
+  const apiUrl = `https://corsproxy.io/?https://aimlapi.com/api/talk?uid=danilo123&msg=${encodeURIComponent(message)}`;
+
 
   fetch(apiUrl)
     .then(res => res.json())
