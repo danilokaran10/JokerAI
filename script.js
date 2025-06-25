@@ -9,7 +9,7 @@ send.addEventListener("click", () => {
   aiText.innerText = "AI is thinking...";
   input.value = "";
 
-  fetch('https://v2.jokeapi.dev/joke/Any')
+  fetch('https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,racist,sexist,explicit')
   .then(res => res.json())
   .then(data => {
     let joke = "";
