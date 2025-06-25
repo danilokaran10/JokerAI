@@ -6,18 +6,25 @@ send.addEventListener("click", () => {
   const message = input.value.trim();
   if (!message) return;
 
-  aiText.innerText = "AI is thinking...";
+  aiText.innerText = "Joker AI is thinking... 🤡";
   input.value = "";
 
-  fetch('https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,racist,sexist,explicit')
-  .then(res => res.json())
-  .then(data => {
-    let joke = "";
-    if (data.type === "single") {
-      joke = data.joke;
-    } else {
-      joke = `${data.setup} ... ${data.delivery}`;
-    }
-    console.log(joke);
-  });
+  fetch("https://api-inference.huggingface.co/models/mrm8488/t5-base-finetuned-joke-generator", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer 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",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      inputs: "Tell me a joke"
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      const joke = data[0]?.generated_text || "No joke found!";
+      aiText.innerText = joke;
+    })
+    .catch(() => {
+      aiText.innerText = "AI error. Try again.";
+    });
 });
