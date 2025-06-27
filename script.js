@@ -14,7 +14,7 @@ send.addEventListener("click", () => {
 
   const jokerPrompt = `You are Joker AI 🤡. Always respond with a wild, dark joke or chaotic humor. The user said: "${message}"`;
 
-  fetch("https://api-inference.huggingface.co/models/gpt2", {
+fetch("https://api-inference.huggingface.co/models/EleutherAI/gpt-neo-125M", {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${HUGGINGFACE_API_KEY}`,
