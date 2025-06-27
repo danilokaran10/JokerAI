@@ -1,6 +1,6 @@
-let input = document.getElementById("input");
-let send = document.getElementById("send");
-let aiText = document.getElementById("ai-text");
+const input = document.getElementById("input");
+const send = document.getElementById("send");
+const aiText = document.getElementById("ai-text");
 
 send.addEventListener("click", () => {
   const message = input.value.trim();
@@ -9,22 +9,23 @@ send.addEventListener("click", () => {
   aiText.innerText = "Joker AI is thinking... 🤡";
   input.value = "";
 
-  fetch("https://api-inference.huggingface.co/models/mrm8488/t5-base-finetuned-joke-generator", {
+  fetch("https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key=AIzaSyC-X2ryWMc_VSQA6aCk8dukIEMliJFjGec", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer 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",
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      inputs: "Tell me a joke"
+      contents: [{
+        parts: [{ text: message }]
+      }]
     })
   })
     .then(res => res.json())
     .then(data => {
-      const joke = data[0]?.generated_text || "No joke found!";
-      aiText.innerText = joke;
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      aiText.innerText = reply || "No response from Gemini.";
     })
     .catch(() => {
-      aiText.innerText = "AI error. Try again.";
+      aiText.innerText = "Error contacting Gemini AI.";
     });
 });
