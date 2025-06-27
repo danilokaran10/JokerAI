@@ -2,8 +2,8 @@ const input = document.getElementById("input");
 const send = document.getElementById("send");
 const aiText = document.getElementById("ai-text");
 
-// Hugging Face API key (replace this with your own from https://huggingface.co/settings/tokens)
-const HUGGINGFACE_API_KEY = "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"; // <== PUT YOURS HERE
+// ✅ Your Hugging Face key (only use this for test/demo — rotate after!)
+const HUGGINGFACE_API_KEY = "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";
 
 send.addEventListener("click", () => {
   const message = input.value.trim();
@@ -12,8 +12,7 @@ send.addEventListener("click", () => {
   aiText.innerText = "Joker AI is thinking... 🤡";
   input.value = "";
 
-  // Tell GPT-2 to act like Joker and be funny
-  const jokerPrompt = `You're Joker AI 🤡. Respond like a crazy, hilarious villain comedian. User said: "${message}"`;
+  const jokerPrompt = `You are Joker AI 🤡. Always respond with a wild, dark joke or chaotic humor. The user said: "${message}"`;
 
   fetch("https://api-inference.huggingface.co/models/gpt2", {
     method: "POST",
@@ -37,6 +36,6 @@ send.addEventListener("click", () => {
       aiText.innerText = reply || "Joker forgot the punchline. Try again.";
     })
     .catch(() => {
-      aiText.innerText = "Joker is having a meltdown 🤡💥";
+      aiText.innerText = "Joker broke down laughing. Try again. 🤡💥";
     });
 });
