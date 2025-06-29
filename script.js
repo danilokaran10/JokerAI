@@ -2,40 +2,23 @@ const input = document.getElementById("input");
 const send = document.getElementById("send");
 const aiText = document.getElementById("ai-text");
 
-// ✅ Your Hugging Face key (only use this for test/demo — rotate after!)
-const HUGGINGFACE_API_KEY = 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";
-
 send.addEventListener("click", () => {
   const message = input.value.trim();
   if (!message) return;
 
-  aiText.innerText = "Joker AI is thinking... 🤡";
+  aiText.innerText = "Joker AI is making up a joke...🤡";
   input.value = "";
 
-  const jokerPrompt = `You are Joker AI 🤡. Always respond with a wild, dark joke or chaotic humor. The user said: "${message}"`;
-
-fetch("https://api-inference.huggingface.co/models/EleutherAI/gpt-neo-125M", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${HUGGINGFACE_API_KEY}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      inputs: jokerPrompt,
-      parameters: {
-        max_new_tokens: 60,
-        temperature: 1.1,
-        top_p: 0.95,
-        repetition_penalty: 1.3
-      }
-    })
-  })
+  fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit")
     .then(res => res.json())
     .then(data => {
-      const reply = data?.[0]?.generated_text?.replace(jokerPrompt, "").trim();
-      aiText.innerText = reply || "Joker forgot the punchline. Try again.";
+      if (data.type === "single") {
+        aiText.innerText = data.joke;
+      } else {
+        aiText.innerText = `${data.setup} 🤡 ${data.delivery}`;
+      }
     })
     .catch(() => {
-      aiText.innerText = "Joker broke down laughing. Try again. 🤡💥";
+      aiText.innerText = "Joker forgot the punchline. Try again.";
     });
 });
