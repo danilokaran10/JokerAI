@@ -95,7 +95,7 @@ body{
 #Text{
     position:absolute;
     bottom: 5%;
-    margin-left: 35vh;
+    margin-left: 30vh;
     display: flex;
     flex-direction: row;
     align-items: center;
