@@ -1,10 +1,8 @@
-const input = document.getElementById("input");
 const send = document.getElementById("send");
 const aiText = document.getElementById("ai-text");
 
 send.addEventListener("click", () => {
-  const message = input.value.trim();
-  if (!message) return;
+  
 
   aiText.innerText = "Joker AI is making up a joke...🤡";
   input.value = "";
