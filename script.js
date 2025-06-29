@@ -2,10 +2,7 @@ const send = document.getElementById("send");
 const aiText = document.getElementById("ai-text");
 
 send.addEventListener("click", () => {
-  
-
-  aiText.innerText = "Joker AI is making up a joke...🤡";
-  input.value = "";
+  aiText.innerText = "Joker AI is making up a joke... 🤡";
 
   fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit")
     .then(res => res.json())
