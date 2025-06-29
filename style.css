@@ -103,7 +103,7 @@ body{
 }
 #send {
     background: linear-gradient(to right,rgb(95, 0, 95),rgb(0,0,110));;
-    font-size: 32px;
+    font-size: 50px;
     padding: 5px 20px;
     font-family: "Bebas Neue";
     cursor: pointer;
