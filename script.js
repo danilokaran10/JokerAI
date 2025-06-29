@@ -3,7 +3,7 @@ const send = document.getElementById("send");
 const aiText = document.getElementById("ai-text");
 
 // ✅ Your Hugging Face key (only use this for test/demo — rotate after!)
-const HUGGINGFACE_API_KEY = "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";
+const HUGGINGFACE_API_KEY = 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";
 
 send.addEventListener("click", () => {
   const message = input.value.trim();
